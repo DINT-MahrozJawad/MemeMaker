@@ -28,7 +28,7 @@
             <TextBlock Margin="5,5,0,0" Grid.Row="4" Grid.Column="0">Imagen</TextBlock>
             <TextBlock Margin="5,5,0,0" Grid.Row="5" Grid.Column="0">Border</TextBlock>
 
-            <TextBox Margin="5,5,10,0" Grid.Row="0" Grid.Column="1">Texto Superior</TextBox>
+            <TextBox x:Name="textoSuperior" Margin="5,5,10,0" Grid.Row="0" Grid.Column="1">Texto Superior</TextBox>
             <TextBox Margin="5,5,10,0" Grid.Row="1" Grid.Column="1">Texto Inferior</TextBox>
             <Slider Margin="5,5,100,0" Grid.Row="2" Grid.Column="1" />
             <Slider Margin="5,5,100,0" Grid.Row="3" Grid.Column="1" />
@@ -37,15 +37,14 @@
 
         </Grid>
 
-        <StackPanel>
-
-            <TextBox x:Name="ColorTextBox" Margin="5"
-                     Text="{Binding ElementName=TextoLabel, Path=Foreground, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
-            <TextBlock x:Name="SizeTextBox" Margin="5"
-                       Text="{Binding ElementName=TextoLabel,Path=FontSize,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <Label x:Name="TextoLabel" Foreground="Black" FontSize="18">Texto Ejemplo</Label>
-
-        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+        </Grid>
 
     </StackPanel>
 </Window>
