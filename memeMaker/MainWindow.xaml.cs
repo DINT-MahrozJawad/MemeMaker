@@ -24,5 +24,17 @@ namespace memeMaker
         {
             InitializeComponent();
         }
+
+        private void BorderCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (((CheckBox)sender).IsChecked == true)
+            {
+               border.BorderThickness = new Thickness(5);
+            }
+            else
+            {
+                border.BorderThickness = new Thickness();
+            }
+        }
     }
 }

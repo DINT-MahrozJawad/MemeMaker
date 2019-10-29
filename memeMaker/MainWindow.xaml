@@ -6,8 +6,12 @@
         xmlns:local="clr-namespace:memeMaker"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800">
-    <StackPanel Orientation="Vertical">
-        <Grid Height="225">
+    <Window.Resources>
+        <!-- Aquí van los estilos -->
+    </Window.Resources>
+
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Height="145">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -29,22 +33,25 @@
             <TextBlock Margin="5,5,0,0" Grid.Row="5" Grid.Column="0">Border</TextBlock>
 
             <TextBox x:Name="textoSuperior" Margin="5,5,10,0" Grid.Row="0" Grid.Column="1">Texto Superior</TextBox>
-            <TextBox Margin="5,5,10,0" Grid.Row="1" Grid.Column="1">Texto Inferior</TextBox>
-            <Slider Margin="5,5,100,0" Grid.Row="2" Grid.Column="1" />
-            <Slider Margin="5,5,100,0" Grid.Row="3" Grid.Column="1" />
-            <TextBox Margin="5,5,10,0" Grid.Row="4" Grid.Column="1"></TextBox>
-            <CheckBox Margin="5,5,10,0" Grid.Row="5" Grid.Column="1"></CheckBox>
+            <TextBox x:Name="textoInferior" Margin="5,5,10,0" Grid.Row="1" Grid.Column="1">Texto Inferior</TextBox>
+            <Slider x:Name="sliderAlto" Margin="5,5,100,0" Grid.Row="2" Grid.Column="1" Value="300" Minimum="50" Maximum="1000"/>
+            <Slider x:Name="sliderAncho" Margin="5,5,100,0" Grid.Row="3" Grid.Column="1" Value="300" Minimum="50" Maximum="1000" />
+            <TextBox x:Name="rutaImagen" Margin="5,5,10,0" Grid.Row="4" Grid.Column="1" Text="https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg"></TextBox>
+            <CheckBox x:Name="borderCheckBox" Margin="5,5,10,0" Grid.Row="5" Grid.Column="1" Checked="BorderCheckBox_Checked"></CheckBox>
 
         </Grid>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="9*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-        </Grid>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
 
-    </StackPanel>
+            <Border x:Name="border" BorderBrush="Black" Width="{Binding ElementName=sliderAncho, Mode=TwoWay, Path=Value}" Height="{Binding ElementName=sliderAlto, Mode=TwoWay, Path=Value}" >
+                <Grid>
+                    <Image  Stretch="Fill" Grid.Column="0" Grid.Row="0" Source="{Binding Text, ElementName=rutaImagen, Mode=TwoWay}"/>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" FontSize="20" Foreground="White"  HorizontalAlignment="Center" Text="{Binding Text, ElementName=textoSuperior, Mode=TwoWay}" />
+                        <TextBlock DockPanel.Dock="Bottom" TextWrapping="Wrap" FontSize="20" Foreground="White"  HorizontalAlignment="Center" Text="{Binding Text, ElementName=textoInferior, Mode=TwoWay}" />
+                    </DockPanel>
+                </Grid>
+            </Border>
+        </ScrollViewer>
+    </DockPanel>
 </Window>
